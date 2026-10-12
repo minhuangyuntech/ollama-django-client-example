@@ -1,0 +1,32 @@
+:root {color-scheme:light;--navy:#10263a;--teal:#087e83;--mint:#75d7cd;--paper:#f6f5f0;--ink:#162e40}
+* {box-sizing:border-box}
+body {margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 system-ui,"Microsoft JhengHei",sans-serif}
+header {background:var(--navy);color:white}
+.header-inner {max-width:1180px;margin:auto;padding:36px 28px}
+.eyebrow {color:var(--mint);margin:0;font-size:15px;letter-spacing:.06em}
+h1 {font-size:38px;line-height:1.35;margin:12px 0}
+header p:last-child {color:#c9dce4;margin:0}
+main {max-width:1180px;margin:32px auto;padding:0 28px;display:grid;grid-template-columns:1fr 1.05fr;gap:52px}
+.section-number {color:var(--teal);font-size:14px;margin:0 0 4px}
+h2 {font-size:25px;margin:0 0 18px}
+label {display:block;font-weight:600;margin:16px 0 6px}
+select,textarea,button {font:inherit;border-radius:6px}
+select,textarea {width:100%;background:white;border:1px solid #a8bcb9;padding:10px;color:var(--ink)}
+textarea {resize:vertical;min-height:170px}
+button {padding:10px 26px;background:var(--teal);border:0;color:white;cursor:pointer}
+button:hover {background:#06696d}
+button:focus-visible,select:focus-visible,textarea:focus-visible {outline:3px solid var(--mint);outline-offset:3px}
+.hint {font-size:14px;color:#5c707a}
+.model-name {font-size:14px;color:var(--teal);margin:0 0 10px}
+.answer {margin:0;background:#e5eeea;border-left:4px solid var(--teal);padding:22px;min-height:170px;white-space:pre-wrap;overflow-wrap:anywhere;font:17px/1.8 system-ui,"Microsoft JhengHei",sans-serif}
+.metrics {display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin:22px 0 0}
+.metrics div {border-bottom:1px solid #cddbd7;padding:8px 0 12px}
+dt {font-size:13px;color:#607680}
+dd {margin:3px 0 0;font-size:23px;font-weight:600}
+.empty {padding:32px 0;color:#5c737d;border-top:1px solid #c8d8d3}
+.empty span {font-size:21px}
+.error,.errorlist {color:#a03b2c}
+.error {border-left:3px solid #a03b2c;padding-left:12px}
+.errorlist {font-size:14px;margin:8px 0;padding-left:20px}
+footer {max-width:1124px;margin:28px auto;padding:22px 0;border-top:1px solid #cbd9d4;color:#627780;font-size:14px}
+@media(max-width:800px) {main {grid-template-columns:1fr;gap:30px}h1 {font-size:30px}footer {margin:24px 28px}}

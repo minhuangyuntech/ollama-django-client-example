@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>我的 AI 問答網站</title>
+  <link rel="stylesheet" href="{% static 'chat/style.css' %}">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <p class="eyebrow">Django × Ollama</p>
+      <h1>我的 AI 問答網站</h1>
+      <p>在自己的電腦設計網站，透過校內 API 使用 AI 模型。</p>
+    </div>
+  </header>
+  <main>
+    <section aria-labelledby="question-title">
+      <p class="section-number">01 / 提問</p>
+      <h2 id="question-title">選擇模型，提出問題</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label for="{{ form.model.id_for_label }}">{{ form.model.label }}</label>
+        {{ form.model }} {{ form.model.errors }}
+        <label for="{{ form.question.id_for_label }}">{{ form.question.label }}</label>
+        {{ form.question }} {{ form.question.errors }}
+        <p class="hint">每次提問獨立處理，模型回答需自行查核。</p>
+        <button type="submit">送出問題</button>
+      </form>
+      {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+    </section>
+    <section aria-labelledby="answer-title">
+      <p class="section-number">02 / 回答與觀察</p>
+      <h2 id="answer-title">模型回答</h2>
+      {% if answer %}
+        <p class="model-name">模型：{{ answer.model }}</p>
+        <pre class="answer">{{ answer.text }}</pre>
+        <dl class="metrics">
+          <div><dt>本次 API 呼叫</dt><dd>{{ answer.elapsed_ms|floatformat:0 }} ms</dd></div>
+          <div><dt>輸出 token</dt><dd>{{ answer.output_tokens|default_if_none:"未回報" }}</dd></div>
+          <div><dt>生成速度</dt><dd>{{ answer.tokens_per_second|floatformat:1|default:"未回報" }} token/s</dd></div>
+          <div><dt>伺服器總時間</dt><dd>{{ answer.server_total_ms|floatformat:0|default:"未回報" }} ms</dd></div>
+          <div><dt>模型載入時間</dt><dd>{{ answer.load_ms|floatformat:0|default:"未回報" }} ms</dd></div>
+        </dl>
+        <p class="hint">API 呼叫時間包含網路與處理等待；生成速度由 Ollama 回報欄位計算。</p>
+      {% else %}
+        <div class="empty"><span>等待你的第一個問題</span><p>完成送出後，回答與本次量測資訊會顯示在這裡。</p></div>
+      {% endif %}
+    </section>
+  </main>
+  <footer>瀏覽器呼叫自己的 Django；API_KEY 僅在 Django 後端使用。</footer>
+</body>
+</html>
